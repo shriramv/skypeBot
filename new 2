@@ -1,0 +1,114 @@
+ m_taskAssignmentOriginDAO.deleteAllOriginsForTaskAssignments(m_tenant, allTaskAssignmentsIDs);
+
+
+Hibernate: 
+    delete 
+    from
+        age_ts_ta_origin_reassigned 
+    where
+        (
+            ta_origin_id
+        ) IN (
+            select
+                ta_origin_id 
+            from
+                HT_age_ts_ta_origin
+        )
+Hibernate: 
+    delete 
+    from
+        age_ts_ta_origin_assigned 
+    where
+        (
+            ta_origin_id
+        ) IN (
+            select
+                ta_origin_id 
+            from
+                HT_age_ts_ta_origin
+        )
+Hibernate: 
+    delete 
+    from
+        age_ts_ta_origin 
+    where
+        (
+            ta_origin_id
+        ) IN (
+            select
+                ta_origin_id 
+            from
+                HT_age_ts_ta_origin
+        )
+
+		
+
+ m_participantsGroupUMObjectDAO.deleteAllForTasks(m_tenant, p_taskIDs);
+
+		
+		
+select
+        aparticipa0_.pg_um_obj_id as col_0_0_ 
+    from
+        age_ts_part_group_um_obj aparticipa0_ 
+    where
+        aparticipa0_.participants_group_id in (
+            select
+                ataskparti1_.pg_id 
+            from
+                age_ts_task_participants_group ataskparti1_ 
+            inner join
+                age_ts_participants_group ataskparti1_1_ 
+                    on ataskparti1_.pg_id=ataskparti1_1_.pg_id 
+            where
+                ataskparti1_.task_participants_id in (
+                    select
+                        abasetaskp2_.tp_id 
+                    from
+                        age_ts_base_task abasetaskp2_ 
+                    where
+                        abasetaskp2_.task_id in (
+                            ?
+                        )
+                ) 
+                or ataskparti1_.task_participants_id in (
+                    select
+                        abasetaskp3_.tp_id_orig 
+                    from
+                        age_ts_base_task abasetaskp3_ 
+                    where
+                        abasetaskp3_.task_id in (
+                            ?
+                        )
+                )
+            )
+
+			
+			  delete 
+    from
+        age_ts_part_group_um_obj 
+    where
+        pg_um_obj_id in (
+            ?
+        )
+
+		
+		
+		
+		
+		
+		 update
+        age_ts_ta_origin_reassigned 
+    set
+        delegate_task_id=? 
+    where
+        ta_origin_id=?
+
+		
+		
+		
+		
+		WARN ABaseDao - Failed to complete transaction: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect): [com.aris.age.dao.model.ATAOriginReassignedPersistentEntity#5201d7bb-8818-4d70-9867-a444e873f0dc]
+
+		
+		

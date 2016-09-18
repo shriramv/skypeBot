@@ -1,0 +1,22 @@
+{
+  "name": "fnkfd",
+  "version": "1.0.0",
+  "description": "First bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "shriram",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.2.3",
+    "restify": "^4.1.1"
+  }
+}
